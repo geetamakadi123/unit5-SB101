@@ -1,0 +1,54 @@
+
+
+ Q1/- What is JDBC, Write a note on JDBC driver software.
+ 
+ A)JDBC:
+   ====
+ 
+         1) Java Database Connectivity (JDBC) is an application programming interface (API) for the programming language Java, which defines how a client
+           
+            may access any kind of tabular data, especially relational database. It is part of Java Standard Edition platform, from Oracle Corporation
+          
+         2) The JDBC classes are contained in the Java Package java.sql and javax.sql. JDBC helps you to write Java applications that manage these three 
+            programming activities:
+
+				1) Connect to a data source, like a database.
+				2) Send queries and update statements to the database
+				3) Retrieve and process the results received from the database in answer to your query
+ 
+ B)JDBC driver :
+   =============
+
+			--it is a translation software written in Java according to the JDBC specification (it comes in the form of Jar file.)
+			
+		1) Responsibility of JDBC driver s/w :
+		   =================================
+			
+			1. establishing the Connection.
+			
+			2. receiving the JDBC method calls (java method call ) and translate them into DBMS understandable format.(SQL) and forward them to the DB s/w.
+			
+			3.Translating the DB s/w given result into the Java format (Java objects) and returns that object to the JDBC client.
+			
+			
+		2) Step of connect our java application with the DB server (mysql):
+		   ===============================================================
+			
+			1. download/get the jdbc driver related jar file (mysql-connector.jar) and set that jar file inside the classpath of our application.
+			
+			2.Load the Driver related main class into the memory.
+			
+			3. prepare the Connection string.
+			
+			4. establish the connection.
+			
+			5.after performing the CRUD operation close the connection.
+			
+		3)  Setting the jar file in the classpath of our application:
+			=======================================================
+			
+			rightclick on the project----> build path ----> configure build path---->libraries---->Classpath---->Add External jars--->
+			select the downloaded jar file ----> apply and close.
+ 
+ 
+

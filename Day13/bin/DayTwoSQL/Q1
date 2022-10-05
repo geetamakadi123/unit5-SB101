@@ -1,0 +1,159 @@
+Q1/-
+Cocoa Confections is a small bakery that sells brownies, cookies, pies, and other
+delicious treats to customers online. It keeps records of all of its online sales in an
+SQL database that is automatically populated as customers places orders on its site.
+In its database, Cocoa Confections has a customers table to keep track of customer
+contact information, and an orders table to keep track of various orders that those
+customers have placed. The schema of these tables is as follows:
+CREATE TABLE customers (
+customer_id INT PRIMARY KEY,
+first_name VARCHAR(255) NOT NULL,
+last_name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+address VARCHAR(255) DEFAULT NULL,
+city VARCHAR(255) DEFAULT NULL,
+state VARCHAR(2) DEFAULT NULL,
+zip_code VARCHAR(5) DEFAULT NULL
+);
+CREATE TABLE orders (
+order_id INT PRIMARY KEY,
+customer_id INT NOT NULL,
+order_placed_date DATE NOT NULL,
+FOREIGN KEY (customer_id) REFERENCES customers
+(customer_id)
+);
+It's the end of 2016, and the owner of Cocoa Confections wants to write an SQL
+query that finds the COUNT of orders placed in 2016 by customer e-mail address.
+She wants to ORDER the results by the COUNT of orders placed in 2016,
+descending, so that she can personally send thank-you e-mails to Cocoa
+Confection's top customers by order volume.
+Can you write a query that will help the owner of Cocoa Confections find the
+COUNT of all orders placed in 2016, by customer e-mail address, sorted
+Descending?
+Sample Input:
+Customers:
++-----------------+---------------+--------------+---------------------+------------+-------------+-------+----------
+--+
+
+| customer_id | first_name | last_name | email | address | city | state | zip_code |
++-----------------+---------------+--------------+--------------------+------------+-------------+-------+-----------
+--+
+| 1 | abc | a | abc@mail.com | 1st street | chennai | TN | 60001 |
+| 2 | efg | e | efg@mail.com | 2nd street | Bangalore | KA| 50002 |
+| 3 | ijk | i | ijk@mail.com | 3nd street | Mumbai | MH | 40002 |
++------------------+----------------+------------+--------------------+---------------+-----------+-------+----------
++
+Orders:
++-----------+-----------------+--------------------------+
+| order_id | customer_id | order_placed_date |
++-----------+-----------------+--------------------------+
+| 1 | 1 | 2016-11-11 |
+| 2 | 1 | 2016-10-01 |
+| 3 | 2 | 2016-06-01 |
+| 4 | 2 | 2015-06-01 |
+| 5 | 1 | 2015-06-01 |
++----------+-------------+--------------------------------+
+
+ans:
+
+
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database geetadb;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use geetadb;
+Database changed
+mysql> CREATE TABLE customers (
+    -> customer_id INT PRIMARY KEY,
+    -> first_name VARCHAR(255) NOT NULL,
+    -> last_name VARCHAR(255) NOT NULL,
+    -> email VARCHAR(255) NOT NULL,
+    -> address VARCHAR(255) DEFAULT NULL,
+    -> city VARCHAR(255) DEFAULT NULL,
+    -> state VARCHAR(2) DEFAULT NULL,
+    -> zip_code VARCHAR(5) DEFAULT NULL
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY,
+    -> customer_id INT NOT NULL,
+    -> order_placed_date DATE NOT NULL,
+    -> FOREIGN KEY (customer_id) REFERENCES customers
+    -> (customer_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into customers values(1 , 'abc' ,'a' , 'abc@mail.com' , '1st street' , 'chennai' , 'TN' , '60001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customers values(2 , 'efg' ,'e' , 'efg@mail.com' , '2st street' , 'Bangalore' , 'KA' , '50002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customers values(3 , 'ijk' ,'i' , 'ijk@mail.com' , '3st street' , 'Mumbai' , 'MH' , '40002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orders values(1 , 1  , '2016-11-11');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orders values(2 , 1  , '2016-10-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orders values(3 , 2  , '2016-06-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orders values(4, 2  , '2015-06-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orders values(5 , 1  , '2015-06-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select
+    -> customers.email, COUNT(*) AS 2016_num_orders
+    -> FROM
+    -> orders
+    -> INNER JOIN
+    -> cusstomers on orders.customer_id = customers.customer_id
+    -> WHERE
+    -> orders.order_place_date BETWEEN CAST(2016-01-01' AS DATE) AND CAST('2016-12-31' AS DATE)
+    '> GROUP NY
+    '>
+    '>
+    '> ^C
+
+mysql> select
+    ->  customers.email, COUNT(*) AS 2016_num_orders
+    -> FROM
+    -> orders
+    -> INNER JOIN
+    -> customers on orders.customer_id = customers.customer_id
+    -> WHERE
+    -> orders.order_placed_date BETWEEN CAST('2016-01-01' AS DATE) AND CAST('2016-12-31' AS DATE)
+    -> GROUP BY
+    ->  customers.email
+    -> ORDER BY
+    -> 2016_num_orders DESC;
+
+
+
+out put :-
++--------------+-----------------+
+| email        | 2016_num_orders |
++--------------+-----------------+
+| abc@mail.com |               2 |
+| efg@mail.com |               1 |
++--------------+-----------------+
+2 rows in set (0.02 sec)
+

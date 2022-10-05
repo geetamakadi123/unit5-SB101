@@ -1,0 +1,83 @@
+Q5) Explain Difference between Upper Bounded Wildcards and Lower Bounded Wildcards with Example
+
+Upper Bounded Wildcards
+==> The purpose of upper bounded wildcards is to decrease the restrictions on a variable.
+==> It restricts the unknown type to be a specific type or a subtype of that type.
+It is used by declaring wildcard character "?" followed by the extends or
+implements keyword, followed by its upper bound.
+
+
+Syntax:
+List<? extends Number>
+
+
+abstract class Animal{
+
+abstract void voice();
+
+}
+
+class Dog extends Animal{
+void voice(){
+System.out.println("bhow");
+}
+}
+
+
+class Cat extends Animal{
+void voice(){
+System.out.println("meow");
+}
+}
+
+class Demo{
+
+public static void makeNoise(List<? extends Animal> lists){
+
+for(Animal a:lists){
+
+a.voice();
+}
+}
+public static void main(String args[]){
+List<Dog> list1=new ArrayList<>();
+list1.add(new Dog());
+
+List<Cat> list2=new ArrayList<Cat>();
+list2.add(new Cat());
+
+makeNoise(list1);
+makeNoise(list2);
+}
+}
+
+
+Lower Bounded Wildcards:
+The purpose of lower bounded wildcards is to restrict the unknown type to be a specific type or a supertype of that type.
+It is used by declaring wildcard character "?" followed
+by the super keyword, followed by its lower bound.
+
+Syntax:
+List<? super Integer>
+
+
+public class Main {
+
+public static void addNumbers(List<? super Integer> list)
+{
+
+    for(Object i:list){
+
+    System.out.println(i);
+    }
+}
+public static void main(String[] args) {
+
+List<Double> l1=Arrays.asList(10.23,20.12,50.4);
+addNumbers(l1);
+
+List<Number> l2=Arrays.asList(1.0,2.0,3.0);
+addNumbers(l2);
+}
+}
+

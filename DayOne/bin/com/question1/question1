@@ -1,0 +1,16 @@
+Question 1: Explain difference between PriorityQueue() and LinkedList().
+Ans:
+PriorityQueue() can be found inside Queue() where LinkedList() can  be found in both
+Queue() as well as List().
+both of these are from java.util package
+
+As we are comparing PriorityQueue() with linkedlist() we will compare according to LinkedList() preset in Queue().
+
+In case of PriorityQueue() its main objective is to print its element in sorted order
+where LinkedList() in queque() is not perticularly used for sorting ,it gives n number of extra methods which helps in LIKE:
+Accesing/deleting first element .
+Accesing/deleting Last element.
+
+It gives a method called remove() which can directly remove that perticularly on element from list;
+
+we can use above method by using Iterator().
